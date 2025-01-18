@@ -1,6 +1,31 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+    <script>
+        function canAutoPlay() {
+            var audio = document.createElement('audio');
+            audio.preload = 'auto';
+            audio.src = '背景音乐.mp3';
+            audio.setAttribute('autoplay', 'autoplay');
+            audio.setAttribute('muted','muted');
+            document.body.appendChild(audio);
+            return audio.play();
+        }
+
+        function playMusic() {
+            var audio = document.querySelector('audio');
+            audio.removeAttribute('muted');
+            audio.play();
+        }
+
+        window.addEventListener('load', function() {
+            canAutoPlay().then(() => {
+                playMusic();
+            }).catch(() => {
+                document.body.addEventListener('click', playMusic);
+            });
+        });
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>我的博客</title>
@@ -145,6 +170,9 @@
     </style>
 </head>
 <body>
+    <audio id="bgMusic" loop>
+        <source src="背景音乐.mp3" type="audio/mpeg">
+    </audio>
     <div class="container">
         <header>
             <img src="./img/logo.jpg" alt="博主头像" class="avatar">
@@ -155,7 +183,12 @@
                 <a href="科目三.html" class="social-link">进入</a>
                 <a href="科目三.html" class="social-link">科三</a>
             </div>
+
         </header>
     </div>
 </body>
 </html>
+
+
+
+
